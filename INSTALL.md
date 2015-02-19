@@ -1,4 +1,5 @@
-installation instruction
+
+Installation instructions.
 
 ## Install MongoDB/Redis (ubuntu/debian)
 
@@ -12,13 +13,13 @@ server - very good price/quality ratio.
 
 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/
 
-Follow instructions on link above. Then edit `/etc/mongodb.conf`,
-add `bind_ip = 127.0.0.1` to the start.
+Follow instructions on the link above. Then edit `/etc/mongodb.conf`,
+and add `bind_ip = 127.0.0.1` to the start.
 
     restart mongodb
 
-If you don't use db auth - no mode actions needed. If you plan to use
-it - create database and set login/password.
+If you don't use db auth, no more actions needed. If you plan to use
+it, create database and set login/password.
 
 
 ### Redis
@@ -43,8 +44,8 @@ For ubuntu:
 
     sudo apt-get install graphicsmagick
 
-You also need Cairo to generate identicons. If not installed (for example,
-at server), read instructions for [node-canvas](https://github.com/Automattic/node-canvas#installation)
+You also need Cairo to generate identicons. If it's not installed (for example,
+on a server), read instructions for [node-canvas](https://github.com/Automattic/node-canvas#installation)
 package.
 
 For ubuntu:
@@ -56,41 +57,40 @@ For ubuntu:
 
 Version 0.10+ required.
 
-See [developper's manual](https://github.com/nodeca/nodeca/tree/master/docs/developer-setup)
+See [developer's manual](https://github.com/nodeca/nodeca/tree/master/docs/developer-setup)
 
 
 ## Install nodeca
 
 
-### Bleeding age, server (read only)
+### Bleeding edge, server (read-only)
 
-Select this, if you like to see demo
+Select this, if you like to see demo:
 
     git clone git://github.com/nodeca/nodeca.git nodeca
     cd nodeca
     make pull-ro
 
 `./etc` folder contains simple upstart config for fast deployment. It's not
-secure, but allows easily install and switch node versions. That's convenient
-for demo/development.
+secure, but it allows you to easily install and switch node versions.
+That's convenient for demo/development.
 
 
-### Developpment (read/write, core team)
+### Development (read/write, core team)
 
-Select this, if you are in core development team, and has read/write access
-to nodeca repos
+Select this, if you are in the core development team, and have read/write
+access to nodeca repos:
 
     git clone git@github.com:nodeca/nodeca.git nodeca
     cd nodeca
     make pull
 
 
-### Regular install (production deployment)
+### Regular install (production deployment):
 
     npm install nodeca
 
-(*) That will not work right now, since we did not released anything
-Then, depending on your installation type, run:
+(*) That won't work right now, since we didn't release anything yet.
 
 
 ## Configure
@@ -98,16 +98,16 @@ Then, depending on your installation type, run:
 Copy **ALL** `*.example` files in root config folder to `*.yml`:
 
 ```bash
-cp config/application.example.yml config/application.yml
-cp config/database.example.yml config/database.yml
+cp config/application.yml.example config/application.yml
+cp config/database.yml.example config/database.yml
 ...
 ```
 
-**Don't** touch files in `./config/examples` subfolders. Those are for education
-purposes only.
+**Don't** touch files in `./config/examples` subfolders. Those are for
+educational purposes only.
 
 Edit `application.yml` and `database.yml` to fit your environment.
-For development - no changes usually needed.
+For development no changes are usually needed.
 
 
 ## Init database
@@ -116,26 +116,27 @@ Apply migrations:
 
     ./nodeca.js migrate --all
 
-If you need test data, apply seeds. List available:
+If you need test data, apply seeds. List available ones:
 
     ./nodeca.js seed
 
-Then use one by number:
+Then you can choose seeds to apply using their numbers:
 
     ./nodeca.js seed -n <NUMBER_1> -n <NUMBER_2>
 
 
 ## Run
 
-In terminal (break with ctrl+c)
+In a terminal (break with ctrl+c):
 
     ./nodeca.js server
 
-Run with monitor (your dev location, autorestart when you make changes):
+Run with monitor (your dev location, will be auto-restarted when you make
+changes):
 
     make dev-server
 
-Run on server (via `upstart`, learn script from `./etc` subfolder)
+Run on a server (via `upstart`, check a script from `./etc` subfolder):
 
     start nodeca
 
